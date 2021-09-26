@@ -6,7 +6,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-let items = ["Hit + to add new item", "<- click on checkbox to delete "];
+let items = ["Hit + to add new item", "⬅click on checkbox"];
 
 app.get("/", (req, res)=>{
     let today = new Date();
