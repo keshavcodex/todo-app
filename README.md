@@ -1,0 +1,8 @@
+# TODO-APP
+
+## npm i
+Run this command in terminal to install required modules.
+## node app.js
+and to start application run the command above
+## [localhost:3000]
+then application will start on this port
