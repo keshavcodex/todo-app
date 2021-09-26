@@ -56,10 +56,12 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
     const itemName = req.body.newItem;
-    const item = new Item({
-        name: itemName
-    });
-    item.save();
+    if(itemName != ''){
+        const item = new Item({
+            name: itemName
+        });
+        item.save();
+    }
     res.redirect("/");
 });
 
@@ -67,7 +69,6 @@ app.post("/delete", (req, res) => {
     const checkedItemId = req.body.checkbox;
     Item.findByIdAndRemove(checkedItemId, (err)=>{
         if(!err){
-            console.log("Successfully deleted checked item");
         }
     });
     res.redirect("/");
@@ -75,6 +76,6 @@ app.post("/delete", (req, res) => {
 
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("Listening on port 3000");
 });
