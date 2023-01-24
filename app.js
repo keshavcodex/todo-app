@@ -1,14 +1,16 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
+import express from "express";
+import dotenv from "dotenv";
 
+const app = express();
+dotenv.config();
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-
-mongoose.connect("mongodb://localhost:27017/todolistDB", { useNewUrlParser: true });
+const mongourl = process.env.MONGO_URL;
+mongoose.connect(mongourl, { useNewUrlParser: true });
 
 const itemSchema = {
     name: String
@@ -24,7 +26,6 @@ const items2 = new Item({
 });
 
 const defaultItems = [items1, items2];
-
 
 
 app.get("/", (req, res) => {
@@ -79,3 +80,5 @@ app.post("/delete", (req, res) => {
 app.listen(process.env.PORT || 3000, () => {
     console.log("Listening on port 3000");
 });
+
+// export default app;
